@@ -24,7 +24,7 @@ function showDay(dayNumber) {
       <h3>3. Gün</h3>
       <p><strong>Kahvaltı:</strong> Otel kahvaltısı</p>
       <p><strong>Öğle:</strong> Cowboy caviar, siyah fasulye, börülce, mısır, domates, kırmızı soğan, biber, lime, tortilla cipsi</p>
-      <p><strong>Akşam:</strong> Pilav, patlıcan yemeği, yoğurt / cacık</p>
+      <p><strong>Akşam:</strong> Pilav, sebze yemeği, yoğurt / cacık</p>
       <p><strong>Atıştırmalık:</strong> Cips ve meyve</p>
     `,
     4: `
