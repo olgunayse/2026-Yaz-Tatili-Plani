@@ -1,180 +1,1715 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>2026 Yaz Tatili</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Destin 2026 — Yaz Tatili</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ocean: #0a6e8a;
+  --sky: #38b6d4;
+  --sand: #f0d89e;
+  --coral: #e8634a;
+  --foam: #eef9fd;
+  --deep: #062d3a;
+  --gold: #f4b942;
+  --white: #ffffff;
+  --text: #0d2a33;
+  --muted: #557a87;
+  --glass: rgba(255,255,255,0.12);
+  --glass-border: rgba(255,255,255,0.22);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: #fff8ee;
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute; inset: 0;
+  background: linear-gradient(175deg,
+    #ffe8b0 0%,
+    #ffd280 12%,
+    #ffb347 24%,
+    #ff8c5a 36%,
+    #e8735a 44%,
+    #c85a6e 52%,
+    #8c4a8c 62%,
+    #5a6aaa 72%,
+    #3a8abf 82%,
+    #2ab8d8 92%,
+    #5de0f0 100%
+  );
+  z-index: 0;
+}
+
+.hero-bg::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 60% 40% at 72% 18%, rgba(255,255,200,0.55) 0%, transparent 65%),
+    radial-gradient(ellipse 100% 30% at 50% 100%, rgba(90,220,240,0.4) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 25% at 20% 75%, rgba(255,180,80,0.15) 0%, transparent 60%);
+}
+
+/* Morning light haze */
+.stars {
+  position: absolute; inset: 0; z-index: 1;
+  background-image:
+    radial-gradient(ellipse 200px 80px at 72% 16%, rgba(255,255,220,0.7), transparent),
+    radial-gradient(ellipse 120px 40px at 65% 22%, rgba(255,240,180,0.4), transparent),
+    radial-gradient(ellipse 300px 60px at 50% 8%, rgba(255,220,150,0.3), transparent);
+  animation: haze 5s ease-in-out infinite alternate;
+}
+
+@keyframes haze {
+  0% { opacity: 0.8; transform: scale(1); }
+  100% { opacity: 1; transform: scale(1.03); }
+}
+
+/* Animated waves */
+.waves-wrap {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  z-index: 2;
+  height: 220px;
+  overflow: hidden;
+}
+
+.wave {
+  position: absolute;
+  bottom: 0;
+  left: -10%;
+  width: 120%;
+  height: 100%;
+}
+
+.wave svg { width: 100%; height: 100%; }
+
+.wave-1 { animation: wave1 7s ease-in-out infinite; opacity: 0.6; }
+.wave-2 { animation: wave2 9s ease-in-out infinite; opacity: 0.4; bottom: 10px; }
+.wave-3 { animation: wave1 11s ease-in-out infinite reverse; opacity: 0.25; bottom: 20px; }
+
+@keyframes wave1 {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(-5%); }
+}
+@keyframes wave2 {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(4%); }
+}
+
+/* Sun */
+.sun {
+  position: absolute;
+  width: 180px; height: 180px;
+  top: 60px; right: 10%;
+  z-index: 2;
+  display: flex; align-items: center; justify-content: center;
+  animation: float 7s ease-in-out infinite;
+}
+.sun-corona {
+  position: absolute;
+  width: 180px; height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,240,150,0.5) 0%, rgba(255,200,80,0.2) 40%, transparent 70%);
+  animation: pulse 3s ease-in-out infinite alternate;
+}
+.sun-core {
+  width: 90px; height: 90px;
+  background: radial-gradient(circle at 35% 35%, #fff5a0, #ffdd44 50%, #ffb800);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 10px rgba(255,220,80,0.25),
+    0 0 0 24px rgba(255,200,60,0.12),
+    0 0 60px 20px rgba(255,190,50,0.4);
+  position: relative; z-index: 2;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.7; }
+  100% { transform: scale(1.15); opacity: 1; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+/* NAVBAR */
+.navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 60px;
+  transition: all 0.4s ease;
+}
+
+.navbar.scrolled {
+  background: rgba(255,245,220,0.92);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 1px 0 rgba(200,140,60,0.2);
+  padding: 14px 60px;
+}
+
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  color: #3a1a00;
+  letter-spacing: 1px;
+}
+
+.nav-logo span { color: #c0440a; }
+
+.nav-links { display: flex; gap: 6px; }
+
+.nav-links a {
+  color: rgba(60,26,0,0.75);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  padding: 7px 14px;
+  border-radius: 40px;
+  transition: all 0.25s;
+}
+
+.nav-links a:hover {
+  color: #3a1a00;
+  background: rgba(255,255,255,0.4);
+}
+
+/* Hero Content */
+.hero-content {
+  position: relative;
+  z-index: 10;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 140px 60px 280px;
+  max-width: 760px;
+}
+
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 22px;
+  animation: fadeUp 0.8s ease both;
+}
+
+.badge {
+  background: rgba(255,255,255,0.35);
+  border: 1px solid rgba(255,255,255,0.6);
+  color: #7a3a00;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 40px;
+}
+
+.divider-line {
+  width: 40px; height: 1px;
+  background: rgba(120,60,0,0.3);
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(48px, 7vw, 84px);
+  line-height: 1.08;
+  color: #3a1a00;
+  margin-bottom: 24px;
+  animation: fadeUp 0.8s ease 0.1s both;
+  text-shadow: 0 2px 20px rgba(255,220,120,0.5);
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: #c0440a;
+}
+
+.hero-sub {
+  font-size: 17px;
+  color: rgba(60,25,0,0.7);
+  line-height: 1.7;
+  max-width: 480px;
+  margin-bottom: 40px;
+  animation: fadeUp 0.8s ease 0.2s both;
+}
+
+.hero-cta {
+  display: flex;
+  gap: 14px;
+  animation: fadeUp 0.8s ease 0.3s both;
+}
+
+.btn-primary {
+  background: #c0440a;
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 40px;
+  cursor: pointer;
+  letter-spacing: 0.3px;
+  transition: all 0.25s;
+}
+
+.btn-primary:hover {
+  background: #a03508;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(192,68,10,0.3);
+}
+
+.btn-ghost {
+  background: rgba(255,255,255,0.4);
+  color: #3a1a00;
+  border: 1px solid rgba(255,255,255,0.6);
+  padding: 14px 28px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+
+.btn-ghost:hover {
+  background: rgba(255,255,255,0.65);
+  border-color: rgba(255,255,255,0.9);
+}
+
+/* Hero scroll indicator */
+.scroll-hint {
+  position: absolute;
+  bottom: 240px;
+  left: 60px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: rgba(60,26,0,0.5);
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  animation: fadeUp 1s ease 0.6s both;
+}
+
+.scroll-line {
+  width: 1px;
+  height: 50px;
+  background: linear-gradient(to bottom, transparent, rgba(60,26,0,0.3));
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+/* Floating stat cards */
+.hero-stats {
+  position: absolute;
+  right: 60px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  animation: fadeIn 1s ease 0.5s both;
+}
+
+.stat-pill {
+  background: rgba(255,255,255,0.45);
+  border: 1px solid rgba(255,255,255,0.7);
+  backdrop-filter: blur(20px);
+  padding: 16px 22px;
+  border-radius: 16px;
+  min-width: 160px;
+}
+
+.stat-pill .num {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  color: #3a1a00;
+  display: block;
+}
+
+.stat-pill .label {
+  font-size: 11px;
+  color: rgba(60,26,0,0.6);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* MAIN CONTENT */
+main {
+  background: var(--foam);
+  position: relative;
+  z-index: 5;
+}
+
+.section {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 90px 40px;
+}
+
+.section-header {
+  margin-bottom: 54px;
+}
+
+.section-tag {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--ocean);
+  margin-bottom: 10px;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(32px, 4vw, 46px);
+  color: var(--deep);
+  line-height: 1.15;
+}
+
+.section-title span { color: var(--ocean); font-style: italic; }
+
+/* ── SECTION: OVERVIEW ── */
+#overview { background: var(--foam); }
+
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.ov-card {
+  background: white;
+  border-radius: 20px;
+  padding: 30px 26px;
+  border: 1px solid rgba(0,0,0,0.06);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.ov-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 50px rgba(10,110,138,0.1);
+}
+
+.ov-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--ocean), var(--sky));
+  border-radius: 20px 20px 0 0;
+}
+
+.ov-icon {
+  font-size: 36px;
+  margin-bottom: 14px;
+}
+
+.ov-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 42px;
+  color: var(--deep);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.ov-label {
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+/* ── SECTION: HOTEL ── */
+#otel { background: white; }
+
+.hotel-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  align-items: center;
+}
+
+.hotel-img {
+  border-radius: 24px;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+  position: relative;
+  background: linear-gradient(135deg, var(--ocean), var(--sky));
+}
+
+.hotel-img-inner {
+  width: 100%;
+  height: 100%;
+  background: url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800') center/cover no-repeat;
+  transform: scale(1.02);
+  transition: transform 0.6s ease;
+}
+
+.hotel-img:hover .hotel-img-inner { transform: scale(1); }
+
+.hotel-overlay {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 24px;
+  background: linear-gradient(to top, rgba(6,45,58,0.8), transparent);
+  color: white;
+}
+
+.hotel-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(244,185,66,0.9);
+  color: var(--deep);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 5px 12px;
+  border-radius: 40px;
+  margin-bottom: 8px;
+}
+
+.hotel-info { padding: 10px 0; }
+
+.hotel-info h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 34px;
+  color: var(--deep);
+  margin-bottom: 18px;
+}
+
+.info-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.info-row:last-child { border-bottom: none; }
+
+.info-icon {
+  width: 42px; height: 42px;
+  border-radius: 12px;
+  background: var(--foam);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.info-text .key {
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 2px;
+}
+
+.info-text .val {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--deep);
+}
+
+/* ── SECTION: MENU ── */
+#menu { background: var(--foam); }
+
+.day-selector {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 36px;
+  flex-wrap: wrap;
+}
+
+.day-btn {
+  padding: 11px 22px;
+  border-radius: 40px;
+  border: 1.5px solid rgba(10,110,138,0.25);
+  background: transparent;
+  color: var(--ocean);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.22s;
+}
+
+.day-btn:hover, .day-btn.active {
+  background: var(--ocean);
+  border-color: var(--ocean);
+  color: white;
+}
+
+.meal-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.meal-card {
+  background: white;
+  border-radius: 20px;
+  padding: 28px;
+  border: 1px solid rgba(0,0,0,0.06);
+  transition: transform 0.25s;
+}
+
+.meal-card:hover { transform: translateY(-3px); }
+
+.meal-time {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.meal-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+}
+
+.meal-dot.breakfast { background: #f4b942; }
+.meal-dot.lunch { background: #38b6d4; }
+.meal-dot.dinner { background: #e8634a; }
+.meal-dot.snack { background: #7bc67e; }
+
+.meal-time-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.meal-items {
+  list-style: none;
+}
+
+.meal-items li {
+  font-size: 14px;
+  color: var(--text);
+  padding: 5px 0;
+  border-bottom: 1px dashed rgba(0,0,0,0.07);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.meal-items li::before {
+  content: '';
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: var(--sky);
+  flex-shrink: 0;
+}
+
+.meal-items li:last-child { border-bottom: none; }
+
+/* ── SECTION: BUDGET ── */
+#butce { background: var(--deep); }
+
+#butce .section-title { color: white; }
+#butce .section-tag { color: var(--sky); }
+
+.budget-layout {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 50px;
+  align-items: start;
+}
+
+.budget-form {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 24px;
+  padding: 36px;
+  backdrop-filter: blur(10px);
+}
+
+.form-group { margin-bottom: 22px; }
+
+.form-label {
+  display: block;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 8px;
+}
+
+.form-input {
+  width: 100%;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 12px;
+  padding: 14px 18px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  color: white;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.form-input:focus {
+  border-color: var(--sky);
+  background: rgba(56,182,212,0.08);
+}
+
+.form-input::placeholder { color: rgba(255,255,255,0.2); }
+
+.budget-result-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.result-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
+  padding: 28px 30px;
+  text-align: center;
+  transition: all 0.3s;
+}
+
+.result-card.highlight {
+  background: linear-gradient(135deg, rgba(56,182,212,0.2), rgba(10,110,138,0.2));
+  border-color: rgba(56,182,212,0.3);
+}
+
+.result-card .r-label {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  margin-bottom: 8px;
+}
+
+.result-card .r-value {
+  font-family: 'Playfair Display', serif;
+  font-size: 46px;
+  color: white;
+  line-height: 1;
+}
+
+.result-card.highlight .r-value { color: var(--sky); }
+
+.result-card .r-sub {
+  font-size: 13px;
+  color: rgba(255,255,255,0.35);
+  margin-top: 6px;
+}
+
+.calc-btn {
+  width: 100%;
+  background: var(--sky);
+  color: var(--deep);
+  border: none;
+  padding: 16px;
+  border-radius: 12px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 6px;
+  letter-spacing: 0.5px;
+  transition: all 0.25s;
+}
+
+.calc-btn:hover {
+  background: #5cd2ed;
+  transform: translateY(-2px);
+}
+
+/* ── SECTION: GAS ── */
+#benzin { background: white; }
+
+.gas-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 50px;
+  align-items: center;
+}
+
+.gas-visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 320px;
+}
+
+.gas-ring {
+  position: relative;
+  width: 240px; height: 240px;
+}
+
+.gas-ring svg {
+  width: 100%; height: 100%;
+  transform: rotate(-90deg);
+}
+
+.gas-ring-text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.gas-ring-text .big {
+  font-family: 'Playfair Display', serif;
+  font-size: 38px;
+  color: var(--deep);
+  line-height: 1;
+}
+
+.gas-ring-text .small {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 4px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.gas-form { padding: 0; }
+
+.range-group { margin-bottom: 28px; }
+
+.range-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.range-label {
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.range-value {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ocean);
+}
+
+.range-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 5px;
+  border-radius: 10px;
+  background: linear-gradient(to right, var(--ocean) 0%, var(--ocean) var(--val, 50%), #dde7ea var(--val, 50%), #dde7ea 100%);
+  outline: none;
+  cursor: pointer;
+}
+
+.range-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: var(--ocean);
+  border: 3px solid white;
+  box-shadow: 0 2px 8px rgba(10,110,138,0.3);
+  cursor: pointer;
+}
+
+/* ── SECTION: PACKING ── */
+#liste { background: var(--foam); }
+
+.packing-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 36px;
+}
+
+.progress-wrap {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.progress-track {
+  width: 200px;
+  height: 8px;
+  background: rgba(10,110,138,0.12);
+  border-radius: 40px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--ocean), var(--sky));
+  border-radius: 40px;
+  width: 0%;
+  transition: width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.progress-pct {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ocean);
+  min-width: 36px;
+}
+
+.packing-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+}
+
+.pack-item {
+  background: white;
+  border: 2px solid transparent;
+  border-radius: 18px;
+  padding: 22px 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  user-select: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.pack-item:hover {
+  border-color: rgba(10,110,138,0.2);
+  transform: scale(1.04);
+}
+
+.pack-item.checked {
+  background: linear-gradient(135deg, rgba(10,110,138,0.08), rgba(56,182,212,0.1));
+  border-color: var(--ocean);
+}
+
+.pack-item .pack-emoji {
+  font-size: 32px;
+  display: block;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease;
+}
+
+.pack-item:hover .pack-emoji { transform: scale(1.15) rotate(-5deg); }
+.pack-item.checked .pack-emoji { filter: saturate(1.2); }
+
+.pack-item .pack-name {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.pack-item.checked .pack-name { color: var(--ocean); }
+
+.pack-check {
+  position: absolute;
+  top: 10px; right: 10px;
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: var(--ocean);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.pack-item.checked .pack-check {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.pack-check svg { width: 11px; height: 11px; stroke: white; stroke-width: 2.5; }
+
+/* ── SECTION: NOTES ── */
+#notlar { background: white; }
+
+.notes-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 50px;
+}
+
+.notes-input-area { position: relative; }
+
+.notes-textarea {
+  width: 100%;
+  min-height: 180px;
+  background: var(--foam);
+  border: 2px solid rgba(10,110,138,0.15);
+  border-radius: 18px;
+  padding: 20px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  color: var(--text);
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.2s;
+  line-height: 1.6;
+}
+
+.notes-textarea:focus { border-color: var(--ocean); }
+
+.notes-textarea::placeholder { color: rgba(13,42,51,0.35); }
+
+.notes-add-btn {
+  background: var(--ocean);
+  color: white;
+  border: none;
+  padding: 13px 26px;
+  border-radius: 40px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.25s;
+}
+
+.notes-add-btn:hover {
+  background: #0d8aaa;
+  transform: translateY(-2px);
+}
+
+.notes-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 420px;
+  overflow-y: auto;
+}
+
+.note-item {
+  background: var(--foam);
+  border-left: 4px solid var(--sky);
+  border-radius: 0 14px 14px 0;
+  padding: 16px 18px;
+  font-size: 14px;
+  color: var(--text);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  animation: slideIn 0.3s ease;
+  line-height: 1.5;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-10px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.note-del {
+  background: none;
+  border: none;
+  color: rgba(0,0,0,0.2);
+  cursor: pointer;
+  font-size: 18px;
+  flex-shrink: 0;
+  padding: 0;
+  line-height: 1;
+  transition: color 0.2s;
+}
+
+.note-del:hover { color: var(--coral); }
+
+.notes-empty {
+  text-align: center;
+  padding: 40px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--deep);
+  padding: 60px;
+  text-align: center;
+}
+
+.footer-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  color: white;
+  margin-bottom: 12px;
+}
+
+.footer-logo span { color: var(--gold); font-style: italic; }
+
+.footer-sub {
+  font-size: 13px;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 1px;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .navbar { padding: 16px 24px; }
+  .navbar.scrolled { padding: 12px 24px; }
+  .hero-content { padding: 120px 24px 260px; }
+  .hero-stats { display: none; }
+  .scroll-hint { left: 24px; }
+  .overview-grid { grid-template-columns: repeat(2, 1fr); }
+  .hotel-layout, .budget-layout, .gas-layout, .notes-layout { grid-template-columns: 1fr; }
+  .meal-grid { grid-template-columns: 1fr; }
+  .packing-grid { grid-template-columns: repeat(3, 1fr); }
+  .section { padding: 60px 24px; }
+  footer { padding: 40px 24px; }
+  .packing-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .gas-visual { height: 220px; }
+  .gas-ring { width: 180px; height: 180px; }
+}
+</style>
 </head>
 <body>
 
-<header class="hero">
-  <nav class="navbar">
-    <h2>Yaz Tatili 2026</h2>
-    <div>
-      <a href="#otel">Otel</a>
-      <a href="#menu">Yemek</a>
-      <a href="#butce">Bütçe</a>
-      <a href="#benzin">Benzin</a>
-      <a href="#liste">Liste</a>
-      <a href="#notlar">Notlar</a>
-    </div>
-  </nav>
-
-  <div class="hero-content">
-    <p class="tag">Destin, Florida</p>
-    <h1>4 Günlük Yaz Tatili Planı</h1>
-    <p>Otel, yemek planı, benzin hesabı, bütçe, ihtiyaç listesi, ve günlük plan tek yerde.</p>
-    <button onclick="scrollToSection('butce')">Bütçeyi Hesapla</button>
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-logo">Destin <span>'26</span></div>
+  <div class="nav-links">
+    <a href="#overview">Özet</a>
+    <a href="#otel">Otel</a>
+    <a href="#menu">Menü</a>
+    <a href="#butce">Bütçe</a>
+    <a href="#benzin">Benzin</a>
+    <a href="#liste">Liste</a>
+    <a href="#notlar">Notlar</a>
   </div>
-</header>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="stars"></div>
+
+  <!-- Sun -->
+  <div class="sun">
+    <div class="sun-corona"></div>
+    <div class="sun-core"></div>
+  </div>
+
+  <!-- Waves -->
+  <div class="waves-wrap">
+    <div class="wave wave-1">
+      <svg viewBox="0 0 1440 220" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,140 C240,200 480,60 720,140 C960,220 1200,60 1440,140 L1440,220 L0,220 Z" fill="rgba(80,210,230,0.45)"/>
+      </svg>
+    </div>
+    <div class="wave wave-2">
+      <svg viewBox="0 0 1440 220" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,160 C300,80 600,200 900,120 C1100,80 1300,180 1440,120 L1440,220 L0,220 Z" fill="rgba(30,180,210,0.55)"/>
+      </svg>
+    </div>
+    <div class="wave wave-3">
+      <svg viewBox="0 0 1440 220" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,180 C200,120 400,200 700,160 C900,130 1100,200 1440,160 L1440,220 L0,220 Z" fill="rgba(20,150,190,0.75)"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <span class="badge">🌴 Destin, Florida</span>
+      <span class="divider-line"></span>
+      <span style="font-size:12px; color:rgba(255,255,255,0.45); letter-spacing:1px;">Temmuz 2026</span>
+    </div>
+    <h1>4 Günlük<br><em>Yaz Tatili</em><br>Planı</h1>
+    <p class="hero-sub">Otel, yemek menüsü, benzin hesabı, bütçe, hazırlık listesi ve notlar — hepsi tek ekranda, interaktif ve anlık hesaplamalı.</p>
+    <div class="hero-cta">
+      <button class="btn-primary" onclick="document.getElementById('overview').scrollIntoView({behavior:'smooth'})">Plana Git ↓</button>
+      <button class="btn-ghost" onclick="document.getElementById('butce').scrollIntoView({behavior:'smooth'})">Bütçeyi Hesapla</button>
+    </div>
+  </div>
+
+  <!-- Floating stats -->
+  <div class="hero-stats">
+    <div class="stat-pill">
+      <span class="num">4</span>
+      <span class="label">Gün Tatil</span>
+    </div>
+    <div class="stat-pill">
+      <span class="num">$300</span>
+      <span class="label">Otel Toplamı</span>
+    </div>
+    <div class="stat-pill">
+      <span class="num">1,490</span>
+      <span class="label">Mil Yol</span>
+    </div>
+    <div class="stat-pill">
+      <span class="num">~$200</span>
+      <span class="label">Benzin Tahmini</span>
+    </div>
+  </div>
+
+  <!-- Scroll hint -->
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    Kaydır
+  </div>
+</section>
 
 <main>
 
-  <section class="dashboard">
-    <div class="stat-card">
-      <h3>4 Gün</h3>
-      <p>Tatil süresi</p>
+<!-- OVERVIEW -->
+<section class="section" id="overview">
+  <div class="section-header reveal">
+    <p class="section-tag">Genel Bakış</p>
+    <h2 class="section-title">Tatil <span>Özeti</span></h2>
+  </div>
+  <div class="overview-grid">
+    <div class="ov-card reveal" style="transition-delay:0.05s">
+      <div class="ov-icon">🌅</div>
+      <div class="ov-num">4</div>
+      <div class="ov-label">Tatil Günü</div>
     </div>
-    <div class="stat-card">
-      <h3>3 Gece</h3>
-      <p>Otel konaklaması</p>
+    <div class="ov-card reveal" style="transition-delay:0.1s">
+      <div class="ov-icon">🛏️</div>
+      <div class="ov-num">3</div>
+      <div class="ov-label">Otel Gecesi</div>
     </div>
-    <div class="stat-card">
-      <h3>$300</h3>
-      <p>Otel toplamı</p>
+    <div class="ov-card reveal" style="transition-delay:0.15s">
+      <div class="ov-icon">🏨</div>
+      <div class="ov-num">$300</div>
+      <div class="ov-label">Otel Toplamı</div>
     </div>
-    <div class="stat-card">
-      <h3>~$200</h3>
-      <p>Benzin tahmini</p>
+    <div class="ov-card reveal" style="transition-delay:0.2s">
+      <div class="ov-icon">⛽</div>
+      <div class="ov-num">~$200</div>
+      <div class="ov-label">Benzin Tahmini</div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="otel" class="section-card">
-    <h2>Otel Bilgileri</h2>
-    <div class="grid">
-      <div class="box">
-        <h3>Konum</h3>
-        <p>Destin, Florida</p>
-      </div>
-      <div class="box">
-        <h3>Süre</h3>
-        <p>4 gün / 3 gece</p>
-      </div>
-      <div class="box">
-        <h3>Toplam Ücret</h3>
-        <p>$300</p>
-      </div>
-      <div class="box">
-        <h3>Dahil Olanlar</h3>
-        <p>Otel kahvaltısı</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="menu" class="section-card">
-    <h2>Günlük Yemek Planı</h2>
-
-    <div class="tabs">
-      <button onclick="showDay(1)">1. Gün</button>
-      <button onclick="showDay(2)">2. Gün</button>
-      <button onclick="showDay(3)">3. Gün</button>
-      <button onclick="showDay(4)">4. Gün</button>
-    </div>
-
-    <div id="day-content" class="day-content">
-      <h3>1. Gün</h3>
-      <p><strong>Kahvaltı:</strong> Evden çıkmadan kahvaltı / yolda atıştırmalık</p>
-      <p><strong>Öğle:</strong> Sandviç, poğaça, kek, atıştırmalıklar, içecekler</p>
-      <p><strong>Akşam:</strong> Evden getirilenlerden devam</p>
-    </div>
-  </section>
-
-  <section id="butce" class="section-card">
-    <h2>Bütçe Hesaplayıcı</h2>
-
-    <div class="calculator">
-      <label>Otel Ücreti</label>
-      <input type="number" id="hotelCost" value="445">
-
-      <label>Benzin Ücreti</label>
-      <input type="number" id="gasCost" value="200">
-
-      <label>Market / Yemek Ücreti</label>
-      <input type="number" id="foodCost" value="100">
-
-      <label>Kişi Sayısı</label>
-      <input type="number" id="peopleCount" value="3">
-
-      <button onclick="calculateBudget()">Toplamı Hesapla</button>
-
-      <div class="result" id="budgetResult">
-        Toplam ve kişi başı ücret burada görünecek.
+<!-- HOTEL -->
+<section class="section" id="otel" style="background:white;">
+  <div class="section-header reveal">
+    <p class="section-tag">Konaklama</p>
+    <h2 class="section-title">Otel <span>Bilgileri</span></h2>
+  </div>
+  <div class="hotel-layout">
+    <div class="hotel-img reveal">
+      <div class="hotel-img-inner"></div>
+      <div class="hotel-overlay">
+        <div class="hotel-badge">⭐ Dahil Kahvaltı</div>
+        <div style="color:white; font-size:14px; margin-top:2px;">Destin, Florida</div>
       </div>
     </div>
-  </section>
-
-  <section id="benzin" class="section-card">
-    <h2>Benzin Hesaplayıcı</h2>
-
-    <div class="calculator">
-      <label>Toplam Mil</label>
-      <input type="number" id="miles" value="1490">
-
-      <label>MPG</label>
-      <input type="number" id="mpg" value="30">
-
-      <label>Galon Başına Benzin Fiyatı</label>
-      <input type="number" id="gasPrice" value="4">
-
-      <button onclick="calculateGas()">Benzini Hesapla</button>
-
-      <div class="result" id="gasResult">
-        Tahmini benzin masrafı burada görünecek.
+    <div class="hotel-info reveal" style="transition-delay:0.1s">
+      <h3>Tatil Oteli</h3>
+      <div class="info-row">
+        <div class="info-icon">📍</div>
+        <div class="info-text">
+          <div class="key">Konum</div>
+          <div class="val">Destin, Florida</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">📅</div>
+        <div class="info-text">
+          <div class="key">Süre</div>
+          <div class="val">4 Gün / 3 Gece</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">💵</div>
+        <div class="info-text">
+          <div class="key">Toplam Ücret</div>
+          <div class="val">$300</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">🥞</div>
+        <div class="info-text">
+          <div class="key">Dahil Olanlar</div>
+          <div class="val">Sabah Kahvaltısı</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">🏖️</div>
+        <div class="info-text">
+          <div class="key">Özellik</div>
+          <div class="val">Denize Yakın Konum</div>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="liste" class="section-card">
-    <h2>İhtiyaç Listesi</h2>
-    <p>Hazırlanan eşyaları işaretle. Aşağıdaki hazırlık oranı otomatik güncellenir.</p>
+<!-- MENU -->
+<section class="section" id="menu">
+  <div class="section-header reveal">
+    <p class="section-tag">Yemek Planı</p>
+    <h2 class="section-title">Günlük <span>Menü</span></h2>
+  </div>
+  <div class="reveal">
+    <div class="day-selector">
+      <button class="day-btn active" onclick="showMenuDay(1, this)">1. Gün — Yolculuk</button>
+      <button class="day-btn" onclick="showMenuDay(2, this)">2. Gün — Plaj</button>
+      <button class="day-btn" onclick="showMenuDay(3, this)">3. Gün — Keşif</button>
+      <button class="day-btn" onclick="showMenuDay(4, this)">4. Gün — Dönüş</button>
+    </div>
+  </div>
+  <div id="menu-content" class="meal-grid reveal" style="transition-delay:0.1s">
+  </div>
+</section>
 
-    <div class="progress-area">
-      <div class="progress-bar">
-        <div id="progressFill"></div>
+<!-- BUDGET -->
+<section class="section" id="butce" style="background:var(--deep);">
+  <div class="section-header reveal">
+    <p class="section-tag">Finansal Plan</p>
+    <h2 class="section-title">Bütçe <span style="color:var(--sky);">Hesaplayıcı</span></h2>
+  </div>
+  <div class="budget-layout">
+    <div class="budget-form reveal">
+      <div class="form-group">
+        <label class="form-label">Otel Ücreti ($)</label>
+        <input type="number" class="form-input" id="hotelCost" value="300" oninput="liveCalc()">
       </div>
-      <p id="progressText">Hazırlık oranı: 0%</p>
+      <div class="form-group">
+        <label class="form-label">Benzin Ücreti ($)</label>
+        <input type="number" class="form-input" id="gasCost" value="200" oninput="liveCalc()">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Market / Yemek ($)</label>
+        <input type="number" class="form-input" id="foodCost" value="100" oninput="liveCalc()">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Diğer Masraflar ($)</label>
+        <input type="number" class="form-input" id="extraCost" value="50" oninput="liveCalc()">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Kişi Sayısı</label>
+        <input type="number" class="form-input" id="peopleCount" value="3" min="1" oninput="liveCalc()">
+      </div>
     </div>
-
-    <div class="packing-list">
-      <label><input type="checkbox" onchange="updateProgress()"> Plaj havlusu</label>
-      <label><input type="checkbox" onchange="updateProgress()"> Güneş kremi</label>
-      <label><input type="checkbox" onchange="updateProgress()"> Mayo</label>
-      <label><input type="checkbox" onchange="updateProgress()"> Terlik</label>
-      <label><input type="checkbox" onchange="updateProgress()"> Güneş gözlüğü</label>
-      <label><input type="checkbox" onchange="updateProgress()"> Şarj aleti</label>
-      <label><input type="checkbox" onchange="updateProgress()"> Soğutucu</label>
-      <label><input type="checkbox" onchange="updateProgress()"> Atıştırmalıklar</label>
-      <label><input type="checkbox" onchange="updateProgress()"> Su</label>
-      <label><input type="checkbox" onchange="updateProgress()"> Ekstra kıyafet</label>
+    <div class="budget-result-cards reveal" style="transition-delay:0.1s">
+      <div class="result-card">
+        <div class="r-label">Toplam Tahmini Ücret</div>
+        <div class="r-value" id="totalCost">$650</div>
+        <div class="r-sub">Tüm masraflar dahil</div>
+      </div>
+      <div class="result-card highlight">
+        <div class="r-label">Kişi Başı Ücret</div>
+        <div class="r-value" id="perPerson">$217</div>
+        <div class="r-sub">Eşit bölüştürüldüğünde</div>
+      </div>
+      <div class="result-card">
+        <div class="r-label">Günlük Ortalama</div>
+        <div class="r-value" id="perDay">$163</div>
+        <div class="r-sub">4 gün üzerinden</div>
+      </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="notlar" class="section-card">
-    <h2>Tatil Notları</h2>
+<!-- GAS -->
+<section class="section" id="benzin">
+  <div class="section-header reveal">
+    <p class="section-tag">Seyahat Maliyeti</p>
+    <h2 class="section-title">Benzin <span>Hesaplayıcı</span></h2>
+  </div>
+  <div class="gas-layout">
+    <div class="gas-visual reveal">
+      <div class="gas-ring">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="100" r="85" fill="none" stroke="#dde7ea" stroke-width="12"/>
+          <circle cx="100" cy="100" r="85" fill="none" stroke="url(#gasGrad)" stroke-width="12"
+                  stroke-linecap="round" stroke-dasharray="534" id="gasArc" stroke-dashoffset="267"/>
+          <defs>
+            <linearGradient id="gasGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#0a6e8a"/>
+              <stop offset="100%" stop-color="#38b6d4"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <div class="gas-ring-text">
+          <div class="big" id="gasTotalDisp">$199</div>
+          <div class="small">Benzin</div>
+        </div>
+      </div>
+    </div>
+    <div class="gas-form reveal" style="transition-delay:0.1s">
+      <div class="range-group">
+        <div class="range-header">
+          <span class="range-label">Toplam Mil</span>
+          <span class="range-value" id="milesVal">1,490 mil</span>
+        </div>
+        <input type="range" class="range-slider" id="miles" min="100" max="3000" value="1490" step="10" oninput="updateGas()">
+      </div>
+      <div class="range-group">
+        <div class="range-header">
+          <span class="range-label">Yakıt Verimliliği (MPG)</span>
+          <span class="range-value" id="mpgVal">30 mpg</span>
+        </div>
+        <input type="range" class="range-slider" id="mpg" min="10" max="60" value="30" oninput="updateGas()">
+      </div>
+      <div class="range-group">
+        <div class="range-header">
+          <span class="range-label">Galon Fiyatı</span>
+          <span class="range-value" id="gpVal">$4.00</span>
+        </div>
+        <input type="range" class="range-slider" id="gasPrice" min="2" max="7" value="4" step="0.1" oninput="updateGas()">
+      </div>
+      <div style="background: var(--foam); border-radius:16px; padding:22px; margin-top:10px;">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+          <div>
+            <div style="font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:4px;">Gereken Galon</div>
+            <div style="font-size:22px; font-weight:500; color:var(--deep);" id="gallonsDisp">49.7</div>
+          </div>
+          <div>
+            <div style="font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:4px;">Toplam Maliyet</div>
+            <div style="font-size:22px; font-weight:500; color:var(--ocean);" id="gasTotalDisp2">$198.67</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <textarea id="noteInput" placeholder="Buraya tatil için hatırlatmalar yaz..."></textarea>
-    <button onclick="addNote()">Not Ekle</button>
+<!-- PACKING LIST -->
+<section class="section" id="liste">
+  <div class="reveal">
+    <div class="packing-header">
+      <div class="section-header" style="margin-bottom:0">
+        <p class="section-tag">Hazırlık</p>
+        <h2 class="section-title">İhtiyaç <span>Listesi</span></h2>
+      </div>
+      <div class="progress-wrap">
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <span class="progress-pct" id="progressPct">0%</span>
+        <span style="font-size:13px; color:var(--muted);">hazır</span>
+      </div>
+    </div>
+  </div>
+  <div class="packing-grid" id="packingGrid">
+  </div>
+</section>
 
-    <ul id="notesList"></ul>
-  </section>
+<!-- NOTES -->
+<section class="section" id="notlar">
+  <div class="section-header reveal">
+    <p class="section-tag">Hatırlatmalar</p>
+    <h2 class="section-title">Tatil <span>Notları</span></h2>
+  </div>
+  <div class="notes-layout">
+    <div class="notes-input-area reveal">
+      <textarea class="notes-textarea" id="noteInput" placeholder="Tatil için bir not ekle...&#10;&#10;Örn: Plaj çantası hazırla, müzik listesi yap..."></textarea>
+      <button class="notes-add-btn" onclick="addNote()">
+        <span>+</span> Not Ekle
+      </button>
+    </div>
+    <div class="reveal" style="transition-delay:0.1s">
+      <ul class="notes-list" id="notesList">
+        <li class="notes-empty">Henüz not eklenmedi. İlk notunu ekle! 📝</li>
+      </ul>
+    </div>
+  </div>
+</section>
 
 </main>
 
 <footer>
-  <p>2026 Yaz Tatili Planlayıcısı | Beach Vibes Dashboard</p>
+  <div class="footer-logo">Destin <span>'26</span></div>
+  <div class="footer-sub">2026 Yaz Tatili Planlayıcısı — Beach Vibes Dashboard</div>
 </footer>
 
-<script src="script.js"></script>
+<script>
+// ── NAVBAR SCROLL ──
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('navbar');
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// ── SCROLL REVEAL ──
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), 60);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ── MENU DATA ──
+const menuData = {
+  1: {
+    label: "1. Gün — Yolculuk Günü",
+    meals: [
+      { time: "breakfast", label: "Kahvaltı", items: ["Evden çıkmadan hafif kahvaltı", "Yolda atıştırmalık", "Termos kahve / çay"] },
+      { time: "lunch", label: "Öğle Yemeği", items: ["Ev yapımı sandviç", "Poğaça / dinner rolls", "Kek dilimleri", "Meyve suyu ve su"] },
+      { time: "dinner", label: "Akşam Yemeği", items: ["Evden getirilen yiyeceklerden devam", "Atıştırmalıklar", "Cips ve meşrubat"] }
+    ]
+  },
+  2: {
+    label: "2. Gün — Plaj Günü",
+    meals: [
+      { time: "breakfast", label: "Kahvaltı", items: ["Otel kahvaltısı (dahil)", "Taze meyve & yoğurt", "Sıcak içecekler"] },
+      { time: "lunch", label: "Öğle Yemeği", items: ["Sandviç & ekmek", "Krem peynirli kraker", "Salatalık, domates, üzüm", "Limonata & cips"] },
+      { time: "dinner", label: "Akşam Yemeği", items: ["Fettuccine Alfredo", "Brokoli garnitürü", "Taze salata", "Ekmek dilimleri"] }
+    ]
+  },
+  3: {
+    label: "3. Gün — Keşif Günü",
+    meals: [
+      { time: "breakfast", label: "Kahvaltı", items: ["Otel kahvaltısı (dahil)", "Meyve tabağı", "Taze sıkılmış portakal suyu"] },
+      { time: "lunch", label: "Öğle Yemeği", items: ["Cowboy Caviar", "Siyah fasulye, börülce, mısır", "Domates, soğan, biber", "Lime & tortilla cipsi"] },
+      { time: "dinner", label: "Akşam Yemeği", items: ["Pilav & sebze yemeği", "Yoğurt / cacık", "Taze salata"] },
+      { time: "snack", label: "Atıştırmalık", items: ["Cips & meyve", "Çikolata", "Buz gibi limonata"] }
+    ]
+  },
+  4: {
+    label: "4. Gün — Dönüş Günü",
+    meals: [
+      { time: "breakfast", label: "Kahvaltı", items: ["Otel kahvaltısı (dahil)", "Son güne özel kahvaltı", "Taze portakal suyu"] },
+      { time: "lunch", label: "Öğle Yemeği", items: ["Makarna salatası", "Yoğurtlu & mayonezli", "Garnitür, turşu, mısır"] },
+      { time: "dinner", label: "Akşam Yemeği", items: ["Paket mantı", "Sarımsaklı yoğurt", "Tereyağlı salçalı sos", "Salatalık domates salatası"] }
+    ]
+  }
+};
+
+function showMenuDay(day, btn) {
+  document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const data = menuData[day];
+  const grid = document.getElementById('menu-content');
+  grid.style.opacity = '0';
+  grid.style.transform = 'translateY(10px)';
+  setTimeout(() => {
+    grid.innerHTML = data.meals.map(m => `
+      <div class="meal-card">
+        <div class="meal-time">
+          <div class="meal-dot ${m.time}"></div>
+          <span class="meal-time-label">${m.label}</span>
+        </div>
+        <ul class="meal-items">
+          ${m.items.map(i => `<li>${i}</li>`).join('')}
+        </ul>
+      </div>
+    `).join('');
+    grid.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
+    grid.style.opacity = '1';
+    grid.style.transform = 'translateY(0)';
+  }, 150);
+}
+
+showMenuDay(1, document.querySelector('.day-btn'));
+
+// ── LIVE BUDGET CALC ──
+function liveCalc() {
+  const hotel = Number(document.getElementById('hotelCost').value) || 0;
+  const gas = Number(document.getElementById('gasCost').value) || 0;
+  const food = Number(document.getElementById('foodCost').value) || 0;
+  const extra = Number(document.getElementById('extraCost').value) || 0;
+  const people = Math.max(1, Number(document.getElementById('peopleCount').value) || 1);
+  const total = hotel + gas + food + extra;
+  const pp = total / people;
+  const pd = total / 4;
+
+  animateVal('totalCost', '$' + Math.round(total));
+  animateVal('perPerson', '$' + Math.round(pp));
+  animateVal('perDay', '$' + Math.round(pd));
+}
+
+function animateVal(id, newVal) {
+  const el = document.getElementById(id);
+  el.style.transform = 'scale(0.92)';
+  el.style.opacity = '0.5';
+  el.style.transition = 'all 0.2s ease';
+  setTimeout(() => {
+    el.textContent = newVal;
+    el.style.transform = 'scale(1)';
+    el.style.opacity = '1';
+  }, 120);
+}
+
+liveCalc();
+
+// ── GAS CALCULATOR ──
+function updateGas() {
+  const miles = Number(document.getElementById('miles').value);
+  const mpg = Number(document.getElementById('mpg').value);
+  const price = Number(document.getElementById('gasPrice').value);
+  const gallons = miles / mpg;
+  const total = gallons * price;
+
+  document.getElementById('milesVal').textContent = miles.toLocaleString() + ' mil';
+  document.getElementById('mpgVal').textContent = mpg + ' mpg';
+  document.getElementById('gpVal').textContent = '$' + price.toFixed(2);
+  document.getElementById('gallonsDisp').textContent = gallons.toFixed(1);
+  document.getElementById('gasTotalDisp').textContent = '$' + Math.round(total);
+  document.getElementById('gasTotalDisp2').textContent = '$' + total.toFixed(2);
+
+  // Update ring
+  const maxTotal = 1200;
+  const pct = Math.min(total / maxTotal, 1);
+  const circumference = 534;
+  const offset = circumference - (pct * circumference);
+  document.getElementById('gasArc').style.strokeDashoffset = offset;
+
+  // Update range gradients
+  ['miles', 'mpg', 'gasPrice'].forEach(id => {
+    const el = document.getElementById(id);
+    const min = Number(el.min), max = Number(el.max), val = Number(el.value);
+    const pctVal = ((val - min) / (max - min)) * 100;
+    el.style.setProperty('--val', pctVal + '%');
+    el.style.background = `linear-gradient(to right, var(--ocean) 0%, var(--ocean) ${pctVal}%, #dde7ea ${pctVal}%, #dde7ea 100%)`;
+  });
+}
+
+updateGas();
+
+// ── PACKING LIST ──
+const packingItems = [
+  { emoji: '🩱', name: 'Mayo' },
+  { emoji: '🏖️', name: 'Plaj Havlusu' },
+  { emoji: '🕶️', name: 'Güneş Gözlüğü' },
+  { emoji: '🧴', name: 'Güneş Kremi' },
+  { emoji: '👡', name: 'Terlik' },
+  { emoji: '🔌', name: 'Şarj Aleti' },
+  { emoji: '🧊', name: 'Soğutucu' },
+  { emoji: '🍿', name: 'Atıştırmalıklar' },
+  { emoji: '💧', name: 'Su Şişeleri' },
+  { emoji: '👕', name: 'Ekstra Kıyafet' },
+  { emoji: '📱', name: 'Telefon' },
+  { emoji: '💊', name: 'İlaçlar' },
+  { emoji: '🪥', name: 'Tuvalet Çantası' },
+  { emoji: '📷', name: 'Kamera' },
+  { emoji: '🎧', name: 'Kulaklık' },
+];
+
+const packingState = new Set();
+
+function renderPacking() {
+  const grid = document.getElementById('packingGrid');
+  grid.innerHTML = packingItems.map((item, i) => `
+    <div class="pack-item ${packingState.has(i) ? 'checked' : ''}" onclick="togglePack(${i})">
+      <div class="pack-check">
+        <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <span class="pack-emoji">${item.emoji}</span>
+      <span class="pack-name">${item.name}</span>
+    </div>
+  `).join('');
+}
+
+function togglePack(i) {
+  if (packingState.has(i)) {
+    packingState.delete(i);
+  } else {
+    packingState.add(i);
+  }
+  renderPacking();
+  const pct = Math.round((packingState.size / packingItems.length) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressPct').textContent = pct + '%';
+}
+
+renderPacking();
+
+// ── NOTES ──
+const notes = [];
+
+function addNote() {
+  const input = document.getElementById('noteInput');
+  const val = input.value.trim();
+  if (!val) return;
+  notes.unshift(val);
+  input.value = '';
+  renderNotes();
+}
+
+document.getElementById('noteInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter' && e.metaKey) addNote();
+});
+
+function deleteNote(i) {
+  notes.splice(i, 1);
+  renderNotes();
+}
+
+function renderNotes() {
+  const list = document.getElementById('notesList');
+  if (notes.length === 0) {
+    list.innerHTML = '<li class="notes-empty">Henüz not eklenmedi. İlk notunu ekle! 📝</li>';
+    return;
+  }
+  list.innerHTML = notes.map((n, i) => `
+    <li class="note-item">
+      <span>${n}</span>
+      <button class="note-del" onclick="deleteNote(${i})">×</button>
+    </li>
+  `).join('');
+}
+</script>
 </body>
 </html>
