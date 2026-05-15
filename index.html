@@ -403,6 +403,166 @@ main {
 
 .section-title span { color: var(--ocean); font-style: italic; }
 
+
+/* ── SECTION: JOURNEY TIMELINE ── */
+#yolculuk { background: white; }
+
+.timeline {
+  position: relative;
+  padding: 10px 0;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--ocean), var(--sky));
+  transform: translateX(-50%);
+}
+
+.tl-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  margin-bottom: 48px;
+  position: relative;
+}
+
+.tl-item:last-child { margin-bottom: 0; }
+
+.tl-item.left {
+  flex-direction: row;
+  padding-right: calc(50% + 40px);
+  justify-content: flex-end;
+}
+
+.tl-item.right {
+  flex-direction: row;
+  padding-left: calc(50% + 40px);
+  justify-content: flex-start;
+}
+
+.tl-dot {
+  position: absolute;
+  left: 50%;
+  top: 16px;
+  transform: translate(-50%, -50%);
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--ocean);
+  border: 3px solid white;
+  box-shadow: 0 0 0 3px rgba(10,110,138,0.2);
+  z-index: 2;
+  flex-shrink: 0;
+}
+
+.tl-dot.stop { background: var(--gold); box-shadow: 0 0 0 3px rgba(244,185,66,0.25); }
+.tl-dot.arrive { background: var(--coral); box-shadow: 0 0 0 3px rgba(232,99,74,0.25); }
+
+.tl-card {
+  background: var(--foam);
+  border-radius: 20px;
+  padding: 22px 26px;
+  max-width: 380px;
+  border: 1px solid rgba(0,0,0,0.06);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.tl-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(10,110,138,0.1);
+}
+
+.tl-time {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  color: var(--deep);
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.tl-date {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.tl-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--deep);
+  margin-bottom: 6px;
+}
+
+.tl-desc {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.tl-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 40px;
+  margin-bottom: 10px;
+}
+
+.tl-badge.depart { background: rgba(10,110,138,0.1); color: var(--ocean); }
+.tl-badge.rest { background: rgba(244,185,66,0.15); color: #b88000; }
+.tl-badge.arrive { background: rgba(232,99,74,0.12); color: #c04530; }
+
+.journey-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 60px;
+}
+
+.js-card {
+  background: linear-gradient(135deg, var(--ocean), var(--sky));
+  border-radius: 20px;
+  padding: 28px;
+  color: white;
+  text-align: center;
+}
+
+.js-card .js-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 38px;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.js-card .js-label {
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+@media (max-width: 900px) {
+  .timeline::before { left: 24px; }
+  .tl-item.left, .tl-item.right {
+    padding-left: 60px;
+    padding-right: 0;
+    justify-content: flex-start;
+  }
+  .tl-dot { left: 24px; }
+  .tl-card { max-width: 100%; }
+  .journey-summary { grid-template-columns: 1fr; }
+}
+
 /* ── SECTION: OVERVIEW ── */
 #overview { background: var(--foam); }
 
@@ -1132,6 +1292,7 @@ footer {
   <div class="nav-logo">Destin <span>'26</span></div>
   <div class="nav-links">
     <a href="#overview">Özet</a>
+    <a href="#yolculuk">Yolculuk</a>
     <a href="#otel">Otel</a>
     <a href="#menu">Menü</a>
     <a href="#butce">Bütçe</a>
@@ -1176,7 +1337,7 @@ footer {
     <div class="hero-eyebrow">
       <span class="badge">🌴 Destin, Florida</span>
       <span class="divider-line"></span>
-      <span style="font-size:12px; color:rgba(255,255,255,0.45); letter-spacing:1px;">2026 Haziran</span>
+      <span style="font-size:12px; color:rgba(255,255,255,0.45); letter-spacing:1px;">Temmuz 2026</span>
     </div>
     <h1>4 Günlük<br><em>Yaz Tatili</em><br>Planı</h1>
     <p class="hero-sub">Otel, yemek menüsü, benzin hesabı, bütçe, hazırlık listesi ve notlar — hepsi tek ekranda, interaktif ve anlık hesaplamalı.</p>
@@ -1245,6 +1406,78 @@ footer {
   </div>
 </section>
 
+
+<!-- JOURNEY -->
+<section class="section" id="yolculuk" style="background:white;">
+  <div class="section-header reveal">
+    <p class="section-tag">Hareket Planı</p>
+    <h2 class="section-title">Yolculuk <span>Takvimi</span></h2>
+  </div>
+
+  <div class="journey-summary reveal">
+    <div class="js-card">
+      <div class="js-num">13.5</div>
+      <div class="js-label">Saat Yolculuk</div>
+    </div>
+    <div class="js-card">
+      <div class="js-num">1,490</div>
+      <div class="js-label">Mil Mesafe</div>
+    </div>
+    <div class="js-card">
+      <div class="js-num">1</div>
+      <div class="js-label">Mola Durağı</div>
+    </div>
+  </div>
+
+  <div class="timeline reveal" style="transition-delay:0.1s">
+
+    <div class="tl-item left">
+      <div class="tl-card">
+        <div class="tl-badge depart">🚗 Hareket</div>
+        <div class="tl-time">12:00 AM</div>
+        <div class="tl-date">31 Mayıs 2026</div>
+        <div class="tl-title">Evden Çıkış</div>
+        <div class="tl-desc">Gece yarısı yola çıkış. Araç hazır, bavullar yüklü — Destin'e doğru!</div>
+      </div>
+      <div class="tl-dot"></div>
+    </div>
+
+    <div class="tl-item right">
+      <div class="tl-dot stop"></div>
+      <div class="tl-card">
+        <div class="tl-badge rest">☕ Mola</div>
+        <div class="tl-time">8:30 AM</div>
+        <div class="tl-date">31 Mayıs 2026</div>
+        <div class="tl-title">Hattiesburg, Mississippi</div>
+        <div class="tl-desc">Dinlenme tesisinde kahvaltı molası. Yakıt, tuvalet ve güzel bir sabah kahvaltısı!</div>
+      </div>
+    </div>
+
+    <div class="tl-item left">
+      <div class="tl-card">
+        <div class="tl-badge depart">🚗 Devam</div>
+        <div class="tl-time">9:30 AM</div>
+        <div class="tl-date">31 Mayıs 2026</div>
+        <div class="tl-title">Hattiesburg'dan Ayrılış</div>
+        <div class="tl-desc">Dinlenip enerjilendikten sonra yola devam. Son 4 saatlik bölüm!</div>
+      </div>
+      <div class="tl-dot"></div>
+    </div>
+
+    <div class="tl-item right">
+      <div class="tl-dot arrive"></div>
+      <div class="tl-card">
+        <div class="tl-badge arrive">🏖️ Varış</div>
+        <div class="tl-time">1:30 PM</div>
+        <div class="tl-date">31 Mayıs 2026</div>
+        <div class="tl-title">Destin, Florida</div>
+        <div class="tl-desc">Hoş geldiniz Destin! Otel check-in, mayo giy ve plaja koş — tatil başlıyor!</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <!-- HOTEL -->
 <section class="section" id="otel" style="background:white;">
   <div class="section-header reveal">
@@ -1255,7 +1488,7 @@ footer {
     <div class="hotel-img reveal">
       <div class="hotel-img-inner"></div>
       <div class="hotel-overlay">
-        <div class="hotel-badge">⭐ Kahvaltı Dahil</div>
+        <div class="hotel-badge">⭐ Dahil Kahvaltı</div>
         <div style="color:white; font-size:14px; margin-top:2px;">Destin, Florida</div>
       </div>
     </div>
@@ -1512,14 +1745,14 @@ const menuData = {
     label: "2. Gün — Plaj Günü",
     meals: [
       { time: "breakfast", label: "Kahvaltı", items: ["Otel kahvaltısı (dahil)", "Taze meyve & yoğurt", "Sıcak içecekler"] },
-      { time: "lunch", label: "Öğle Yemeği", items: ["Krem peynir, salatalik ve domatesli sandviç", "Uzum", "Limonata & cips"] },
-      { time: "dinner", label: "Akşam Yemeği", items: ["Fettuccine Alfredo veya Domates Soslu Makarna", "Taze salata"] }
+      { time: "lunch", label: "Öğle Yemeği", items: ["Sandviç & ekmek", "Krem peynirli kraker", "Salatalık, domates, üzüm", "Limonata & cips"] },
+      { time: "dinner", label: "Akşam Yemeği", items: ["Fettuccine Alfredo", "Brokoli garnitürü", "Taze salata", "Ekmek dilimleri"] }
     ]
   },
   3: {
     label: "3. Gün — Keşif Günü",
     meals: [
-      { time: "breakfast", label: "Kahvaltı", items: ["Otel kahvaltısı (dahil)", "Meyve tabağı", "Portakal suyu"] },
+      { time: "breakfast", label: "Kahvaltı", items: ["Otel kahvaltısı (dahil)", "Meyve tabağı", "Taze sıkılmış portakal suyu"] },
       { time: "lunch", label: "Öğle Yemeği", items: ["Cowboy Caviar", "Siyah fasulye, börülce, mısır", "Domates, soğan, biber", "Lime & tortilla cipsi"] },
       { time: "dinner", label: "Akşam Yemeği", items: ["Pilav & sebze yemeği", "Yoğurt / cacık", "Taze salata"] },
       { time: "snack", label: "Atıştırmalık", items: ["Cips & meyve", "Çikolata", "Buz gibi limonata"] }
@@ -1528,9 +1761,9 @@ const menuData = {
   4: {
     label: "4. Gün — Dönüş Günü",
     meals: [
-      { time: "breakfast", label: "Kahvaltı", items: ["Otel kahvaltısı (dahil)", "Son güne özel kahvaltı", "Portakal suyu"] },
+      { time: "breakfast", label: "Kahvaltı", items: ["Otel kahvaltısı (dahil)", "Son güne özel kahvaltı", "Taze portakal suyu"] },
       { time: "lunch", label: "Öğle Yemeği", items: ["Makarna salatası", "Yoğurtlu & mayonezli", "Garnitür, turşu, mısır"] },
-      { time: "dinner", label: "Akşam Yemeği", items: ["Paket mantı", "Yoğurt", "Tereyağlı salçalı sos", "Salatalık domates salatası"] }
+      { time: "dinner", label: "Akşam Yemeği", items: ["Paket mantı", "Sarımsaklı yoğurt", "Tereyağlı salçalı sos", "Salatalık domates salatası"] }
     ]
   }
 };
