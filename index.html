@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yaz Tatili Planlayıcısı</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>Yaz Tatili Planlayıcısı</h1>
+  <p>Otel, yemek planı, benzin masrafı ve ihtiyaç listesi tek yerde.</p>
+</header>
+
+<nav>
+  <a href="#hotel">Otel</a>
+  <a href="#menu">Yemek Planı</a>
+  <a href="#gas">Benzin</a>
+  <a href="#packing">İhtiyaçlar</a>
+</nav>
+
+<section class="hero">
+  <div class="overlay">
+    <h2>4 Günlük Beach Tatili</h2>
+    <p>Yaz, deniz, güzel yemekler ve tam beach havası.</p>
+
+    <button onclick="showReminder()">Tatil Hatırlatması</button>
+
+    <p id="reminder-text"></p>
+  </div>
+</section>
+
+<main>
+
+  <section id="hotel" class="card">
+    <h2>Otel Bilgileri</h2>
+
+    <div class="info-grid">
+
+      <div class="info-box">
+        <h3>Konum</h3>
+        <p>Destin, Florida</p>
+      </div>
+
+      <div class="info-box">
+        <h3>Süre</h3>
+        <p>4 Gün / 3 Gece</p>
+      </div>
+
+      <div class="info-box">
+        <h3>Toplam Ücret</h3>
+        <p>$300</p>
+      </div>
+
+      <div class="info-box">
+        <h3>Dahil Olanlar</h3>
+        <p>Kahvaltı + Plaj Erişimi</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="menu" class="card">
+
+    <h2>4 Günlük Tatil Yemek Planı</h2>
+
+    <div class="day-card">
+
+      <h3>1. Gün</h3>
+
+      <h4>Kahvaltı</h4>
+      <p>Evden çıkmadan kahvaltı / yolda atıştırmalık</p>
+
+      <h4>Öğle Yemeği</h4>
+
+      <ul>
+        <li>Sandviç</li>
+        <li>Poğaça / Dinner Rolls</li>
+        <li>Kek</li>
+        <li>Atıştırmalıklar</li>
+        <li>İçecekler</li>
+      </ul>
+
+      <h4>Akşam Yemeği</h4>
+      <p>Evden getirilenlerden devam</p>
+
+    </div>
+
+    <div class="day-card">
+
+      <h3>2. Gün</h3>
+
+      <h4>Kahvaltı</h4>
+      <p>Otel kahvaltısı</p>
+
+      <h4>Öğle Yemeği</h4>
+
+      <ul>
+        <li>Ekmek</li>
+        <li>Krem peynir</li>
+        <li>Salatalık</li>
+        <li>Domates</li>
+        <li>Üzüm</li>
+        <li>Cips</li>
+        <li>Limonata</li>
+      </ul>
+
+      <h4>Akşam Yemeği</h4>
+
+      <ul>
+        <li>Fettuccine</li>
+        <li>Alfredo sos</li>
+        <li>Brokoli</li>
+        <li>Salata</li>
+      </ul>
+
+    </div>
+
+    <div class="day-card">
+
+      <h3>3. Gün</h3>
+
+      <h4>Kahvaltı</h4>
+      <p>Otel kahvaltısı</p>
+
+      <h4>Öğle Yemeği</h4>
+
+      <ul>
+        <li>Siyah fasulye</li>
+        <li>Börülce</li>
+        <li>Mısır</li>
+        <li>Domates</li>
+        <li>Kırmızı soğan</li>
+        <li>Biber</li>
+        <li>Lime</li>
+        <li>Tortilla Cipsi</li>
+      </ul>
+
+      <h4>Akşam Yemeği</h4>
+
+      <ul>
+        <li>Pirinç pilavı</li>
+        <li>Sebze yemeği</li>
+        <li>Yoğurt / cacık</li>
+      </ul>
+
+      <h4>Atıştırmalık</h4>
+
+      <ul>
+        <li>Cips</li>
+        <li>Meyve</li>
+      </ul>
+
+    </div>
+
+    <div class="day-card">
+
+      <h3>4. Gün</h3>
+
+      <h4>Kahvaltı</h4>
+      <p>Otel kahvaltısı</p>
+
+      <h4>Öğle Yemeği</h4>
+
+      <ul>
+        <li>Küçük makarna</li>
+        <li>Yoğurt + mayonez</li>
+        <li>Garnitür</li>
+        <li>Turşu</li>
+        <li>Mısır</li>
+      </ul>
+
+      <h4>Akşam Yemeği</h4>
+
+      <ul>
+        <li>Paket mantı</li>
+        <li>Sarımsaklı yoğurt</li>
+        <li>Tereyağlı salçalı sos</li>
+        <li>Nane / pul biber</li>
+        <li>Salatalık-domates salatası</li>
+      </ul>
+
+    </div>
+
+    <div class="snack-box">
+
+      <h3>Tatil Boyunca</h3>
+
+      <p><strong>Atıştırmalıklar:</strong></p>
+      <p>Cips, kurabiye, meyve</p>
+
+      <p><strong>İçecekler:</strong></p>
+      <p>Su, limonata, meyve suyu</p>
+
+    </div>
+
+  </section>
+
+  <section id="gas" class="card">
+
+    <h2>Benzin Masrafı</h2>
+
+    <div class="info-grid">
+
+      <div class="info-box">
+        <h3>Toplam Mesafe</h3>
+        <p>Yaklaşık 1490 mil</p>
+      </div>
+
+      <div class="info-box">
+        <h3>Benzin Fiyatı</h3>
+        <p>Galon başı yaklaşık $4</p>
+      </div>
+
+      <div class="info-box">
+        <h3>Tahmini Toplam</h3>
+        <p>Yaklaşık $200</p>
+      </div>
+
+    </div>
+
+    <button onclick="showGas()">Benzin Tavsiyesi</button>
+
+    <p id="gas-text"></p>
+
+  </section>
+
+  <section id="packing" class="card">
+
+    <h2>Getirmemiz Gerekenler</h2>
+
+    <div class="packing-grid">
+
+      <div>
+
+        <h3>Plaj İçin</h3>
+
+        <ul>
+          <li>Plaj havlusu</li>
+          <li>Güneş kremi</li>
+          <li>Güneş gözlüğü</li>
+          <li>Terlik</li>
+          <li>Mayo</li>
+        </ul>
+
+      </div>
+
+      <div>
+
+        <h3>Yemek & Atıştırmalık</h3>
+
+        <ul>
+          <li>Soğutucu</li>
+          <li>Atıştırmalıklar</li>
+          <li>İçecekler</li>
+          <li>Tabak / çatal</li>
+          <li>Buz</li>
+        </ul>
+
+      </div>
+
+      <div>
+
+        <h3>Diğer</h3>
+
+        <ul>
+          <li>Şarj aletleri</li>
+          <li>Ekstra kıyafet</li>
+          <li>Bakım ürünleri</li>
+          <li>Plaj çantası</li>
+          <li>Hoparlör</li>
+        </ul>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+<footer>
+  <p>Yaz Tatili Planlayıcısı • Summer 2026</p>
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>
